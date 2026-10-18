@@ -9,13 +9,16 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body data-theme="light">
+  <!-- Toast Notification System (Replaces Native alert) -->
+  <aside id="toastContainer" class="toast-container" aria-live="polite" aria-atomic="true"></aside>
+
   <!-- 2D Viewport Wrapper -->
   <div id="dimensionWrapper" class="desktop-mode">
     
     <!-- Top Navigation Bar -->
     <header class="app-header">
-      <button id="leftMenuBtn" class="nav-btn" aria-label="Open Informational Menu">
-        <span class="hamburger-icon">☰</span>
+      <button id="leftMenuBtn" class="icon-nav-btn" aria-label="Open Informational Menu">
+        <svg class="ui-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
       </button>
 
       <div class="brand">
@@ -24,54 +27,82 @@
       </div>
 
       <div class="header-actions">
-        <!-- 2D Toggle: Desktop vs Mobile Viewport -->
-        <button id="dimensionToggleBtn" class="pill-action-btn" title="Toggle Desktop/Mobile Dimension">
-          🖥️ View
+        <!-- 2D Viewport Toggle -->
+        <button id="dimensionToggleBtn" class="pill-action-btn" title="Toggle Desktop/Mobile Viewport">
+          <svg class="ui-icon-sm" viewBox="0 0 24 24"><path fill="currentColor" d="M4 6h16v10H4V6m16 12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2H0v2h24v-2h-4Z"/></svg>
+          <span id="dimensionLabel">Desktop</span>
         </button>
-        <button id="rightMenuBtn" class="nav-btn chrome-dots" aria-label="Open Utility Menu">
-          ⋮
+
+        <button id="rightMenuBtn" class="icon-nav-btn" aria-label="Open Settings and Utilities">
+          <svg class="ui-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2m0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2m0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2Z"/></svg>
         </button>
       </div>
     </header>
 
     <!-- Main Workspace -->
     <main class="workspace">
+      <!-- Session Telemetry (Productivity Metrics) -->
+      <section class="telemetry-grid">
+        <div class="telemetry-card">
+          <span class="telemetry-label">Active Focus Time</span>
+          <span id="statFocusTime" class="telemetry-value">0 min</span>
+        </div>
+        <div class="telemetry-card">
+          <span class="telemetry-label">Completed Sessions</span>
+          <span id="statSessionsCount" class="telemetry-value">0</span>
+        </div>
+      </section>
+
+      <!-- Active Goal Anchor -->
+      <section class="target-card">
+        <span class="target-caption">Current Anchor Objective:</span>
+        <div id="activeTargetText" class="target-title">No task anchored. Select from checklist.</div>
+      </section>
+
+      <!-- Timer Section -->
       <section class="timer-display-card">
         <div class="session-selector">
-          <button class="session-tab active" data-time="1500">Focus 25m</button>
-          <button class="session-tab" data-time="300">Rest 5m</button>
+          <button class="session-tab active" data-time="1500">Deep Work (25m)</button>
+          <button class="session-tab" data-time="300">Rest Interval (5m)</button>
         </div>
         <div id="timerDisplay" class="countdown-clock">25:00</div>
         <div class="timer-actions">
-          <button id="timerToggle" class="primary-btn">Start Session</button>
+          <button id="timerToggle" class="primary-btn">Start Sprint</button>
           <button id="timerReset" class="secondary-btn">Reset</button>
         </div>
       </section>
 
+      <!-- Cognitive Sound Masking Engine -->
       <section class="quick-sound-card">
         <div class="sound-info">
-          <h3>Ambient Brown Noise</h3>
-          <p>Acoustic masking via Web Audio</p>
+          <h3>Acoustic Flow Shield</h3>
+          <p>Procedural brown-noise spectrum with 40Hz focus harmonic.</p>
         </div>
-        <button id="audioToggleBtn" class="sound-btn">▶ Play Noise</button>
+        <button id="audioToggleBtn" class="sound-btn">
+          <svg class="ui-icon-sm" viewBox="0 0 24 24"><path fill="currentColor" d="M14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77M16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02M3 9v6h4l5 5V4L7 9H3Z"/></svg>
+          <span id="audioBtnText">Enable Audio Shield</span>
+        </button>
       </section>
 
+      <!-- Scratchpad -->
       <section class="notes-panel">
-        <label for="scratchpadArea" class="section-label">Session Scratchpad</label>
-        <textarea id="scratchpadArea" placeholder="Capture rapid thoughts here (auto-saved)..."></textarea>
+        <label for="scratchpadArea" class="section-label">Frictionless Scratchpad</label>
+        <textarea id="scratchpadArea" placeholder="Capture context interruptions here to preserve flow..."></textarea>
       </section>
     </main>
 
     <footer class="app-footer">
-      <p>ZenFocus Pro • Built to Strict Quality Conventions</p>
+      <p>ZenFocus Pro System • Production Standard Architecture</p>
     </footer>
   </div>
 
-  <!-- LEFT SIDEBAR: Informational Drawer -->
-  <aside id="leftSidebar" class="sidebar drawer-left">
+  <!-- LEFT SIDEBAR: Public Informational -->
+  <aside id="leftSidebar" class="sidebar drawer-left" aria-hidden="true">
     <div class="drawer-header">
       <h2>Information Hub</h2>
-      <button class="close-btn" data-close="leftSidebar">✕</button>
+      <button class="close-btn" data-close="leftSidebar" aria-label="Close Left Sidebar">
+        <svg class="ui-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+      </button>
     </div>
     <nav class="drawer-nav">
       <button class="nav-link-btn" data-modal="modalAboutApp">About the App</button>
@@ -84,16 +115,18 @@
     </nav>
   </aside>
 
-  <!-- RIGHT SIDEBAR: Chrome Style Utilities Drawer -->
-  <aside id="rightSidebar" class="sidebar drawer-right">
+  <!-- RIGHT SIDEBAR: Utilities & Safe Checklist -->
+  <aside id="rightSidebar" class="sidebar drawer-right" aria-hidden="true">
     <div class="drawer-header">
-      <h2>Settings & Utilities</h2>
-      <button class="close-btn" data-close="rightSidebar">✕</button>
+      <h2>System Utilities</h2>
+      <button class="close-btn" data-close="rightSidebar" aria-label="Close Right Sidebar">
+        <svg class="ui-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+      </button>
     </div>
     <div class="drawer-content">
-      <!-- Dark Mode Switch -->
+      <!-- Dark Mode -->
       <div class="utility-row">
-        <span>Dark Mode</span>
+        <span>Dark Palette</span>
         <label class="switch">
           <input type="checkbox" id="darkModeCheckbox">
           <span class="slider round"></span>
@@ -102,59 +135,67 @@
 
       <!-- Font Slider (19px to 23px) -->
       <div class="utility-row font-control">
-        <label for="fontSlider">Font Scale: <strong id="fontSizeIndicator">19px</strong></label>
+        <label for="fontSlider">Typographical Floor: <strong id="fontSizeIndicator">19px</strong></label>
         <input type="range" id="fontSlider" min="19" max="23" value="19" step="1">
       </div>
 
-      <!-- To-Do List Section -->
+      <!-- To-Do List (Horizontal Scroll Bug Eliminated) -->
       <div class="todo-widget">
-        <h3>Master Checklist</h3>
+        <h3>Master Objectives</h3>
         <form id="todoForm">
-          <input type="text" id="todoInput" placeholder="Add actionable item..." required>
-          <button type="submit" class="primary-btn">Add</button>
+          <input type="text" id="todoInput" placeholder="New objective..." required maxlength="80">
+          <button type="submit" class="primary-btn submit-sm">Add</button>
         </form>
         <ul id="todoList" class="todo-list"></ul>
       </div>
 
-      <!-- Quick Actions -->
+      <!-- Quick Action Buttons -->
       <div class="actions-stack">
-        <button id="installAppBtn" class="utility-btn">📲 Install App</button>
-        <button id="shareAppBtn" class="utility-btn">🔗 Share App</button>
-        <button id="bluetoothShareBtn" class="utility-btn bluetooth">📶 Share via Bluetooth</button>
+        <button id="installAppBtn" class="utility-btn">
+          <svg class="ui-icon-sm" viewBox="0 0 24 24"><path fill="currentColor" d="M5 20h14v-2H5v2m7-18L5.33 9h4.67v6h4V9h4.67L12 2Z"/></svg>
+          Install Application
+        </button>
+        <button id="shareAppBtn" class="utility-btn">
+          <svg class="ui-icon-sm" viewBox="0 0 24 24"><path fill="currentColor" d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92c0-1.61-1.31-2.92-2.92-2.92Z"/></svg>
+          Share Direct URL
+        </button>
+        <button id="bluetoothShareBtn" class="utility-btn bluetooth">
+          <svg class="ui-icon-sm" viewBox="0 0 24 24"><path fill="currentColor" d="m14.88 16.29 2.83-2.83-4.24-4.24V2h-1v7.59L8.71 5.83l-.71.71L12.41 11l-4.41 4.46.71.71 3.76-3.76V20h1v-7.59l3.53 3.53.88-.35M13.41 4.41l2.12 2.12-2.12 2.12V4.41m0 13.18v-4.24l2.12 2.12-2.12 2.12Z"/></svg>
+          Transmit over Bluetooth
+        </button>
       </div>
     </div>
   </aside>
 
-  <!-- Backdrop overlay for sidebars -->
   <div id="drawerOverlay" class="drawer-overlay"></div>
 
   <!-- ============================================================== -->
-  <!-- FULL SCREEN 100dvh x 100dvw EDGE-TO-EDGE MODALS               -->
+  <!-- FULLSCREEN MODALS (100dvh x 100dvw Edge-To-Edge)               -->
   <!-- ============================================================== -->
 
   <!-- Modal: About App -->
-  <div id="modalAboutApp" class="fullscreen-modal">
+  <div id="modalAboutApp" class="fullscreen-modal" role="dialog" aria-modal="true">
     <header class="modal-header">
       <h2>About ZenFocus Pro</h2>
-      <button class="close-modal-btn">✕ Close</button>
+      <button class="close-modal-btn">Close</button>
     </header>
     <div class="modal-body">
-      <p>ZenFocus Pro is a dual-dimensional (Desktop and Mobile viewports) professional focus environment engineered for deep work cycles, high-frequency task switching, and acoustic focus.</p>
-      <p>Designed strictly to eliminate eye strain with zero font sizes below 19px, seamless light and dark mode contrasts, offline PWA capability, and fully contained Web Audio synthesis.</p>
+      <p>ZenFocus Pro is an enterprise-grade cognitive workflow system built to neutralize distraction, eliminate micro-typographical eye fatigue, and maintain focus telemetry for knowledge workers.</p>
+      <p>Features zero dependencies, offline local storage persistence, responsive two-dimensional viewport emulation, and Web Audio acoustic shielding without external bandwidth consumption.</p>
     </div>
   </div>
 
   <!-- Modal: About Developer -->
-  <div id="modalAboutDev" class="fullscreen-modal">
+  <div id="modalAboutDev" class="fullscreen-modal" role="dialog" aria-modal="true">
     <header class="modal-header">
       <h2>About Developer</h2>
-      <button class="close-modal-btn">✕ Close</button>
+      <button class="close-modal-btn">Close</button>
     </header>
     <div class="modal-body dev-profile">
-      <!-- SWAP URL HERE: Circle Photo Placeholder -->
+      <!-- SWAP URL HERE: Circular Developer Photo Tag -->
       <img 
         src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=80" 
-        alt="Developer Photo" 
+        alt="Developer Photo Placeholder" 
         id="devPhotoPlaceholder" 
         class="circle-dev-img" 
       />
@@ -169,20 +210,18 @@
   </div>
 
   <!-- Modal: About Team -->
-  <div id="modalAboutTeam" class="fullscreen-modal">
+  <div id="modalAboutTeam" class="fullscreen-modal" role="dialog" aria-modal="true">
     <header class="modal-header">
       <h2>About Our Team</h2>
-      <button class="close-modal-btn">✕ Close</button>
+      <button class="close-modal-btn">Close</button>
     </header>
     <div class="modal-body team-grid">
-      <!-- Member 1 -->
       <div class="team-card">
         <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&auto=format&fit=crop&q=80" alt="Sarah Chen" class="team-photo" />
         <h3 class="team-name">Sarah Chen</h3>
         <p class="team-role">Head of Product</p>
         <p class="team-bio">Focusing on high-accessibility interfaces and mindful technology design.</p>
       </div>
-      <!-- Member 2 -->
       <div class="team-card">
         <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&auto=format&fit=crop&q=80" alt="Marcus Gray" class="team-photo" />
         <h3 class="team-name">Marcus Gray</h3>
@@ -192,14 +231,17 @@
     </div>
   </div>
 
-  <!-- Modal: Proprietary Software Warning -->
-  <div id="modalProprietary" class="fullscreen-modal">
+  <!-- Modal: Proprietary Notice -->
+  <div id="modalProprietary" class="fullscreen-modal" role="dialog" aria-modal="true">
     <header class="modal-header">
       <h2>Proprietary Notice</h2>
-      <button class="close-modal-btn">✕ Close</button>
+      <button class="close-modal-btn">Close</button>
     </header>
     <div class="modal-body legal-text">
-      <div class="warning-banner">⚠️ STRICT PROPRIETARY NOTICE & COPYRIGHT RESTRICTION</div>
+      <div class="warning-banner">
+        <svg class="ui-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4m-1 6h2v6h-2V7m0 8h2v2h-2v-2Z"/></svg>
+        <span>STRICT PROPRIETARY NOTICE & COPYRIGHT RESTRICTION</span>
+      </div>
       <p>All source code, asset formulations, procedural audio synthesis routines, UI layouts, and associated algorithms are strictly proprietary property.</p>
       <p>Unauthorized copying, decompilation, redistribution, commercial reselling, or reverse engineering of this software in whole or in part without prior explicit written authorization is unlawful and subject to legal prosecution.</p>
       <p>© ZenFocus Software Works. All rights reserved.</p>
@@ -207,48 +249,46 @@
   </div>
 
   <!-- Modal: How to Use -->
-  <div id="modalHowToUse" class="fullscreen-modal">
+  <div id="modalHowToUse" class="fullscreen-modal" role="dialog" aria-modal="true">
     <header class="modal-header">
       <h2>How to Use</h2>
-      <button class="close-modal-btn">✕ Close</button>
+      <button class="close-modal-btn">Close</button>
     </header>
     <div class="modal-body instructions-list">
       <ol>
-        <li><strong>Set Up Your Session:</strong> Select either 25-minute Focus mode or 5-minute Rest mode on the workspace dashboard.</li>
-        <li><strong>Activate Audio Masking:</strong> Click "Play Noise" to trigger smooth browser-generated brown noise to neutralize background chatter.</li>
-        <li><strong>Manage Deliverables:</strong> Open the right ⋮ menu to track daily actionable items and tweak font readability between 19px and 23px.</li>
-        <li><strong>2D Screen Toggle:</strong> Use the 🖥️ View button on top to toggle between expansive desktop view and mobile phone simulator mode.</li>
+        <li><strong>Anchor an Objective:</strong> Open the right menu, input an objective, and click "Focus" to anchor the timer to a single task.</li>
+        <li><strong>Initiate Work Sprint:</strong> Select a 25-minute Deep Work cycle and click Start Sprint.</li>
+        <li><strong>Activate Audio Shield:</strong> Toggle the acoustic flow shield to generate calibrated 40Hz-focused brown noise that masks room chatter.</li>
+        <li><strong>Track Velocity:</strong> View accumulated focus time and completed sprint cycles directly on the telemetry dashboard.</li>
       </ol>
     </div>
   </div>
 
   <!-- Modal: Partner With Us -->
-  <div id="modalPartner" class="fullscreen-modal">
+  <div id="modalPartner" class="fullscreen-modal" role="dialog" aria-modal="true">
     <header class="modal-header">
       <h2>Partner With Us</h2>
-      <button class="close-modal-btn">✕ Close</button>
+      <button class="close-modal-btn">Close</button>
     </header>
     <div class="modal-body partner-content">
       <p>We actively collaborate with educational institutions, remote work teams, and accessibility organizations.</p>
-      <p>Inquire directly about white-label deployments, custom audio algorithms, or multi-platform licensing.</p>
-      <div class="form-container">
-        <input type="text" placeholder="Organization / Company Name" class="std-input">
-        <input type="email" placeholder="Official Business Email" class="std-input">
-        <button class="primary-btn" onclick="alert('Inquiry received. Our partnership desk will follow up.')">Submit Proposal</button>
-      </div>
+      <form id="partnerForm" class="form-container">
+        <input type="text" id="partnerOrg" placeholder="Organization / Company Name" class="std-input" required>
+        <input type="email" id="partnerEmail" placeholder="Official Business Email" class="std-input" required>
+        <button type="submit" class="primary-btn">Submit Proposal</button>
+      </form>
     </div>
   </div>
 
-  <!-- Modal: Contact Us -->
-  <div id="modalContact" class="fullscreen-modal">
+  <!-- Modal: Contact Us (4 Brand Buttons) -->
+  <div id="modalContact" class="fullscreen-modal" role="dialog" aria-modal="true">
     <header class="modal-header">
       <h2>Contact Us</h2>
-      <button class="close-modal-btn">✕ Close</button>
+      <button class="close-modal-btn">Close</button>
     </header>
     <div class="modal-body">
-      <p>Select your channel of choice to contact our team directly:</p>
+      <p>Direct communications desk for operational inquiries:</p>
       
-      <!-- 4 Required Brand Buttons -->
       <div class="brand-buttons-stack">
         <a href="mailto:contact@zenfocuspro.app" class="brand-btn gmail" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" class="btn-icon"><path fill="currentColor" d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
@@ -264,11 +304,12 @@
         </a>
         <a href="https://facebook.com" class="brand-btn facebook" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" class="btn-icon"><path fill="currentColor" d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>
-          Facebook Page
+          Facebook Corporate
         </a>
       </div>
     </div>
   </div>
+
   <script src="app.js"></script>
 </body>
 </html>
