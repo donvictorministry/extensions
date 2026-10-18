@@ -1,106 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head>  
+  <!-- 1. PARSER CRITICAL DIRECTIVES -->
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ZenFocus Pro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+
+  <!-- 2. PRIMARY SEO METADATA -->
+  <title>ZenFocus Pro — Mobile Cognitive Flow &amp; Focus Telemetry Engine</title>
+  <meta name="title" content="ZenFocus Pro — Mobile Cognitive Flow &amp; Focus Telemetry Engine" />
+  <meta name="description" content="Android-first cognitive workflow workspace. Features procedural 40Hz acoustic flow shielding, task telemetry, and edge-to-edge deep work sprints with zero tracking." />
+  <meta name="keywords" content="focus timer, pomodoro android, procedural brown noise, cognitive flow, deep work telemetry, adhd focus tool, pwa" />
+  <meta name="author" content="Alex Vance" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <link rel="canonical" href="https://yourusername.github.io/zenfocus/" />
+
+  <!-- 3. ANDROID & BROWSER THEME DIRECTIVES -->
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f8fafc" />
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#090d16" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="application-name" content="ZenFocus Pro" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <!-- 4. APPLE MOBILE WEB TAGS -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="ZenFocus Pro" />
+  <link rel="apple-touch-icon" href="icon.svg" />
+
+  <!-- 5. OPEN GRAPH (FACEBOOK, LINKEDIN, DISCORD) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:site_name" content="ZenFocus Pro" />
+  <meta property="og:title" content="ZenFocus Pro — Mobile Cognitive Flow &amp; Focus Telemetry Engine" />
+  <meta property="og:description" content="Android-first cognitive workflow workspace. Procedural 40Hz acoustic shielding, task anchoring, and deep work sprint telemetry." />
+  <meta property="og:url" content="https://yourusername.github.io/zenfocus/" />
+  <meta property="og:image" content="https://yourusername.github.io/zenfocus/icon.svg" />
+  <meta property="og:image:type" content="image/svg+xml" />
+  <meta property="og:image:width" content="512" />
+  <meta property="og:image:height" content="512" />
+  <meta property="og:image:alt" content="ZenFocus Pro Brand Emblem" />
+
+  <!-- 6. TWITTER / X CARD METADATA -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="ZenFocus Pro — Mobile Cognitive Flow Engine" />
+  <meta name="twitter:description" content="Android-first cognitive workflow workspace. Procedural 40Hz acoustic shielding and sprint telemetry." />
+  <meta name="twitter:image" content="https://yourusername.github.io/zenfocus/icon.svg" />
+
+  <!-- 7. PWA MANIFEST & RESOURCE LINKS -->
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" type="image/svg+xml" href="icon.svg" />
+  
+  
+  
+  
+  
+  <!-- HARD DESKTOP LOCKOUT SCRIPT (Executes First) -->
+  <script src="desktop-block.js"></script>
+
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="icon" href="icon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body data-theme="light">
-  <!-- Toast Notification System (Replaces Native alert) -->
-  <aside id="toastContainer" class="toast-container" aria-live="polite" aria-atomic="true"></aside>
+  <!-- Toast Notification System -->
+  <aside id="toastContainer" class="toast-container" aria-live="polite"></aside>
 
-  <!-- 2D Viewport Wrapper -->
-  <div id="dimensionWrapper" class="desktop-mode">
-    
-    <!-- Top Navigation Bar -->
-    <header class="app-header">
-      <button id="leftMenuBtn" class="icon-nav-btn" aria-label="Open Informational Menu">
-        <svg class="ui-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+  <!-- Top App Bar: Anchored Touch Points -->
+  <header class="app-header">
+    <button id="leftMenuBtn" class="header-btn" aria-label="Open Informational Menu">
+      <svg class="ui-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </button>
+
+    <div class="brand-center">
+      <img src="icon.svg" alt="Logo" class="brand-logo" />
+      <span class="brand-name">ZenFocus Pro</span>
+    </div>
+
+    <!-- Right 3-Dots Chrome Menu (Guaranteed Visible on Android) -->
+    <button id="rightMenuBtn" class="header-btn" aria-label="Open Settings and Utilities">
+      <svg class="ui-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2m0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2m0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2Z"/></svg>
+    </button>
+  </header>
+
+  <!-- Edge-to-Edge Android Scroll Surface -->
+  <main class="android-viewport">
+    <!-- Telemetry Metrics -->
+    <section class="telemetry-stack">
+      <div class="telemetry-box">
+        <span class="telemetry-label">Active Focus</span>
+        <span id="statFocusTime" class="telemetry-value">0 min</span>
+      </div>
+      <div class="telemetry-box">
+        <span class="telemetry-label">Sprints Logged</span>
+        <span id="statSessionsCount" class="telemetry-value">0</span>
+      </div>
+    </section>
+
+    <!-- Anchored Goal -->
+    <section class="mobile-card goal-card">
+      <span class="card-caption">Target Objective:</span>
+      <div id="activeTargetText" class="goal-text">No target set. Anchor from right menu.</div>
+    </section>
+
+    <!-- Timer Section -->
+    <section class="mobile-card timer-card">
+      <div class="timer-tabs">
+        <button class="session-tab active" data-time="1500">Focus 25m</button>
+        <button class="session-tab" data-time="300">Rest 5m</button>
+      </div>
+      <div id="timerDisplay" class="countdown-clock">25:00</div>
+      <div class="timer-actions">
+        <button id="timerToggle" class="primary-btn">Start Sprint</button>
+        <button id="timerReset" class="secondary-btn">Reset</button>
+      </div>
+    </section>
+
+    <!-- Audio Shield (Stacked Mobile-Safe Layout) -->
+    <section class="mobile-card audio-shield-card">
+      <div class="audio-header">
+        <h3>Acoustic Flow Shield</h3>
+        <p>Brownian spectrum with 40Hz focus harmonic.</p>
+      </div>
+      <button id="audioToggleBtn" class="sound-action-btn">
+        <svg class="ui-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77M16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02M3 9v6h4l5 5V4L7 9H3Z"/></svg>
+        <span id="audioBtnText">Enable Audio Shield</span>
       </button>
+    </section>
 
-      <div class="brand">
-        <img src="icon.svg" alt="ZenFocus Logo" class="brand-logo" />
-        <span class="brand-name">ZenFocus Pro</span>
-      </div>
+    <!-- Mobile Scratchpad -->
+    <section class="mobile-card">
+      <label for="scratchpadArea" class="card-caption">Mobile Scratchpad</label>
+      <textarea id="scratchpadArea" placeholder="Jot quick thoughts here..."></textarea>
+    </section>
 
-      <div class="header-actions">
-        <!-- 2D Viewport Toggle -->
-        <button id="dimensionToggleBtn" class="pill-action-btn" title="Toggle Desktop/Mobile Viewport">
-          <svg class="ui-icon-sm" viewBox="0 0 24 24"><path fill="currentColor" d="M4 6h16v10H4V6m16 12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2H0v2h24v-2h-4Z"/></svg>
-          <span id="dimensionLabel">Desktop</span>
-        </button>
-
-        <button id="rightMenuBtn" class="icon-nav-btn" aria-label="Open Settings and Utilities">
-          <svg class="ui-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2m0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2m0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2Z"/></svg>
-        </button>
-      </div>
-    </header>
-
-    <!-- Main Workspace -->
-    <main class="workspace">
-      <!-- Session Telemetry (Productivity Metrics) -->
-      <section class="telemetry-grid">
-        <div class="telemetry-card">
-          <span class="telemetry-label">Active Focus Time</span>
-          <span id="statFocusTime" class="telemetry-value">0 min</span>
-        </div>
-        <div class="telemetry-card">
-          <span class="telemetry-label">Completed Sessions</span>
-          <span id="statSessionsCount" class="telemetry-value">0</span>
-        </div>
-      </section>
-
-      <!-- Active Goal Anchor -->
-      <section class="target-card">
-        <span class="target-caption">Current Anchor Objective:</span>
-        <div id="activeTargetText" class="target-title">No task anchored. Select from checklist.</div>
-      </section>
-
-      <!-- Timer Section -->
-      <section class="timer-display-card">
-        <div class="session-selector">
-          <button class="session-tab active" data-time="1500">Deep Work (25m)</button>
-          <button class="session-tab" data-time="300">Rest Interval (5m)</button>
-        </div>
-        <div id="timerDisplay" class="countdown-clock">25:00</div>
-        <div class="timer-actions">
-          <button id="timerToggle" class="primary-btn">Start Sprint</button>
-          <button id="timerReset" class="secondary-btn">Reset</button>
-        </div>
-      </section>
-
-      <!-- Cognitive Sound Masking Engine -->
-      <section class="quick-sound-card">
-        <div class="sound-info">
-          <h3>Acoustic Flow Shield</h3>
-          <p>Procedural brown-noise spectrum with 40Hz focus harmonic.</p>
-        </div>
-        <button id="audioToggleBtn" class="sound-btn">
-          <svg class="ui-icon-sm" viewBox="0 0 24 24"><path fill="currentColor" d="M14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77M16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02M3 9v6h4l5 5V4L7 9H3Z"/></svg>
-          <span id="audioBtnText">Enable Audio Shield</span>
-        </button>
-      </section>
-
-      <!-- Scratchpad -->
-      <section class="notes-panel">
-        <label for="scratchpadArea" class="section-label">Frictionless Scratchpad</label>
-        <textarea id="scratchpadArea" placeholder="Capture context interruptions here to preserve flow..."></textarea>
-      </section>
-    </main>
-
-    <footer class="app-footer">
-      <p>ZenFocus Pro System • Production Standard Architecture</p>
+    <footer class="mobile-footer">
+      <p>Android Native Flow System • 100% dvh Mobile</p>
     </footer>
-  </div>
+  </main>
 
-  <!-- LEFT SIDEBAR: Public Informational -->
+  <!-- LEFT SIDEBAR: Informational Modals Navigation -->
   <aside id="leftSidebar" class="sidebar drawer-left" aria-hidden="true">
     <div class="drawer-header">
       <h2>Information Hub</h2>
-      <button class="close-btn" data-close="leftSidebar" aria-label="Close Left Sidebar">
+      <button class="close-btn" data-close="leftSidebar" aria-label="Close">
         <svg class="ui-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
       </button>
     </div>
@@ -115,53 +157,53 @@
     </nav>
   </aside>
 
-  <!-- RIGHT SIDEBAR: Utilities & Safe Checklist -->
+  <!-- RIGHT SIDEBAR: Android Utilities & Safe Checklist -->
   <aside id="rightSidebar" class="sidebar drawer-right" aria-hidden="true">
     <div class="drawer-header">
-      <h2>System Utilities</h2>
-      <button class="close-btn" data-close="rightSidebar" aria-label="Close Right Sidebar">
+      <h2>Android Utilities</h2>
+      <button class="close-btn" data-close="rightSidebar" aria-label="Close">
         <svg class="ui-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
       </button>
     </div>
     <div class="drawer-content">
-      <!-- Dark Mode -->
+      <!-- Dark Mode Switch -->
       <div class="utility-row">
-        <span>Dark Palette</span>
+        <span>Dark Theme</span>
         <label class="switch">
           <input type="checkbox" id="darkModeCheckbox">
           <span class="slider round"></span>
         </label>
       </div>
 
-      <!-- Font Slider (19px to 23px) -->
+      <!-- Typography Slider (19px to 23px) -->
       <div class="utility-row font-control">
         <label for="fontSlider">Typographical Floor: <strong id="fontSizeIndicator">19px</strong></label>
         <input type="range" id="fontSlider" min="19" max="23" value="19" step="1">
       </div>
 
-      <!-- To-Do List (Horizontal Scroll Bug Eliminated) -->
+      <!-- To-Do Section -->
       <div class="todo-widget">
-        <h3>Master Objectives</h3>
+        <h3>Sprint Objectives</h3>
         <form id="todoForm">
-          <input type="text" id="todoInput" placeholder="New objective..." required maxlength="80">
-          <button type="submit" class="primary-btn submit-sm">Add</button>
+          <input type="text" id="todoInput" placeholder="Add an objective..." required maxlength="80">
+          <button type="submit" class="primary-btn submit-btn">Add</button>
         </form>
         <ul id="todoList" class="todo-list"></ul>
       </div>
 
-      <!-- Quick Action Buttons -->
+      <!-- Quick Actions -->
       <div class="actions-stack">
         <button id="installAppBtn" class="utility-btn">
-          <svg class="ui-icon-sm" viewBox="0 0 24 24"><path fill="currentColor" d="M5 20h14v-2H5v2m7-18L5.33 9h4.67v6h4V9h4.67L12 2Z"/></svg>
-          Install Application
+          <svg class="ui-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M5 20h14v-2H5v2m7-18L5.33 9h4.67v6h4V9h4.67L12 2Z"/></svg>
+          Install on Android
         </button>
         <button id="shareAppBtn" class="utility-btn">
-          <svg class="ui-icon-sm" viewBox="0 0 24 24"><path fill="currentColor" d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92c0-1.61-1.31-2.92-2.92-2.92Z"/></svg>
+          <svg class="ui-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92c0-1.61-1.31-2.92-2.92-2.92Z"/></svg>
           Share Direct URL
         </button>
         <button id="bluetoothShareBtn" class="utility-btn bluetooth">
-          <svg class="ui-icon-sm" viewBox="0 0 24 24"><path fill="currentColor" d="m14.88 16.29 2.83-2.83-4.24-4.24V2h-1v7.59L8.71 5.83l-.71.71L12.41 11l-4.41 4.46.71.71 3.76-3.76V20h1v-7.59l3.53 3.53.88-.35M13.41 4.41l2.12 2.12-2.12 2.12V4.41m0 13.18v-4.24l2.12 2.12-2.12 2.12Z"/></svg>
-          Transmit over Bluetooth
+          <svg class="ui-icon" viewBox="0 0 24 24"><path fill="currentColor" d="m14.88 16.29 2.83-2.83-4.24-4.24V2h-1v7.59L8.71 5.83l-.71.71L12.41 11l-4.41 4.46.71.71 3.76-3.76V20h1v-7.59l3.53 3.53.88-.35M13.41 4.41l2.12 2.12-2.12 2.12V4.41m0 13.18v-4.24l2.12 2.12-2.12 2.12Z"/></svg>
+          Share via Bluetooth
         </button>
       </div>
     </div>
@@ -170,7 +212,7 @@
   <div id="drawerOverlay" class="drawer-overlay"></div>
 
   <!-- ============================================================== -->
-  <!-- FULLSCREEN MODALS (100dvh x 100dvw Edge-To-Edge)               -->
+  <!-- 100% dvh x 100% dvw EDGE-TO-EDGE ANDROID FULLSCREEN MODALS    -->
   <!-- ============================================================== -->
 
   <!-- Modal: About App -->
@@ -180,8 +222,8 @@
       <button class="close-modal-btn">Close</button>
     </header>
     <div class="modal-body">
-      <p>ZenFocus Pro is an enterprise-grade cognitive workflow system built to neutralize distraction, eliminate micro-typographical eye fatigue, and maintain focus telemetry for knowledge workers.</p>
-      <p>Features zero dependencies, offline local storage persistence, responsive two-dimensional viewport emulation, and Web Audio acoustic shielding without external bandwidth consumption.</p>
+      <p>ZenFocus Pro is an Android-exclusive, edge-to-edge cognitive flow workspace designed strictly for mobile touch interfaces.</p>
+      <p>Engineered without dependencies, featuring procedural Web Audio brown-spectrum synthesis and strict typography that never drops below 19px.</p>
     </div>
   </div>
 
@@ -200,7 +242,7 @@
         class="circle-dev-img" 
       />
       <h3 class="dev-name">Alex Vance</h3>
-      <h4 class="dev-role">Principal Systems Architect & UI Designer</h4>
+      <h4 class="dev-role">Principal Systems Architect</h4>
 
       <div id="devBioText" class="clamped-bio">
         Alex Vance is a seasoned software designer and product architect specializing in accessible web applications, offline systems, and progressive browser software. With over a decade of production experience across enterprise engineering, Alex builds tools that prioritize human performance without clutter. This software reflects strict build standards, ensuring readable typography, edge-to-edge responsiveness, zero unnecessary tracking, and uncompromising runtime stability. Every component in this application was handcrafted to balance technical minimalism with rich sensory design.
@@ -215,7 +257,7 @@
       <h2>About Our Team</h2>
       <button class="close-modal-btn">Close</button>
     </header>
-    <div class="modal-body team-grid">
+    <div class="modal-body team-stack">
       <div class="team-card">
         <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&auto=format&fit=crop&q=80" alt="Sarah Chen" class="team-photo" />
         <h3 class="team-name">Sarah Chen</h3>
@@ -240,10 +282,10 @@
     <div class="modal-body legal-text">
       <div class="warning-banner">
         <svg class="ui-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4m-1 6h2v6h-2V7m0 8h2v2h-2v-2Z"/></svg>
-        <span>STRICT PROPRIETARY NOTICE & COPYRIGHT RESTRICTION</span>
+        <span>STRICT PROPRIETARY NOTICE</span>
       </div>
       <p>All source code, asset formulations, procedural audio synthesis routines, UI layouts, and associated algorithms are strictly proprietary property.</p>
-      <p>Unauthorized copying, decompilation, redistribution, commercial reselling, or reverse engineering of this software in whole or in part without prior explicit written authorization is unlawful and subject to legal prosecution.</p>
+      <p>Unauthorized copying, decompilation, redistribution, commercial reselling, or reverse engineering of this software in whole or in part without prior explicit written authorization is unlawful.</p>
       <p>© ZenFocus Software Works. All rights reserved.</p>
     </div>
   </div>
@@ -254,12 +296,12 @@
       <h2>How to Use</h2>
       <button class="close-modal-btn">Close</button>
     </header>
-    <div class="modal-body instructions-list">
-      <ol>
-        <li><strong>Anchor an Objective:</strong> Open the right menu, input an objective, and click "Focus" to anchor the timer to a single task.</li>
-        <li><strong>Initiate Work Sprint:</strong> Select a 25-minute Deep Work cycle and click Start Sprint.</li>
-        <li><strong>Activate Audio Shield:</strong> Toggle the acoustic flow shield to generate calibrated 40Hz-focused brown noise that masks room chatter.</li>
-        <li><strong>Track Velocity:</strong> View accumulated focus time and completed sprint cycles directly on the telemetry dashboard.</li>
+    <div class="modal-body">
+      <ol class="instructions-list">
+        <li><strong>Set Your Target:</strong> Open the right menu, create an objective, and tap Anchor to bind it to the timer.</li>
+        <li><strong>Engage Sprint:</strong> Select 25m Deep Work and tap Start Sprint.</li>
+        <li><strong>Enable Flow Shield:</strong> Tap "Enable Audio Shield" to activate local procedural 40Hz acoustic masking.</li>
+        <li><strong>Track Velocity:</strong> View accumulated focus time and completed sprint cycles directly on your mobile dashboard.</li>
       </ol>
     </div>
   </div>
@@ -270,10 +312,10 @@
       <h2>Partner With Us</h2>
       <button class="close-modal-btn">Close</button>
     </header>
-    <div class="modal-body partner-content">
-      <p>We actively collaborate with educational institutions, remote work teams, and accessibility organizations.</p>
+    <div class="modal-body">
+      <p>We actively collaborate with educational institutions, remote teams, and accessibility groups.</p>
       <form id="partnerForm" class="form-container">
-        <input type="text" id="partnerOrg" placeholder="Organization / Company Name" class="std-input" required>
+        <input type="text" id="partnerOrg" placeholder="Organization Name" class="std-input" required>
         <input type="email" id="partnerEmail" placeholder="Official Business Email" class="std-input" required>
         <button type="submit" class="primary-btn">Submit Proposal</button>
       </form>
@@ -287,8 +329,7 @@
       <button class="close-modal-btn">Close</button>
     </header>
     <div class="modal-body">
-      <p>Direct communications desk for operational inquiries:</p>
-      
+      <p>Select your preferred communication channel:</p>
       <div class="brand-buttons-stack">
         <a href="mailto:contact@zenfocuspro.app" class="brand-btn gmail" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" class="btn-icon"><path fill="currentColor" d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
@@ -311,5 +352,7 @@
   </div>
 
   <script src="app.js"></script>
+  <script src="neuromatrix.js"></script>
+  <script src="takuzu.js"></script>
 </body>
 </html>
