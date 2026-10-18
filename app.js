@@ -4,7 +4,7 @@ if ('serviceWorker' in navigator) {
 }
 
 // ==============================================================
-// 1. NON-BLOCKING ASYNC TOAST SYSTEM (Zero Native alert())
+// 1. NON-BLOCKING ASYNC TOAST SYSTEM
 // ==============================================================
 const toastContainer = document.getElementById('toastContainer');
 
@@ -13,7 +13,7 @@ function showToast(message, type = 'info') {
   toast.className = `toast toast-${type}`;
   toast.innerHTML = `
     <span>${message}</span>
-    <button style="border:none;background:transparent;cursor:pointer;color:inherit;font-weight:bold;">✕</button>
+    <button style="border:none;background:transparent;color:inherit;font-weight:bold;font-size:var(--font-size);">✕</button>
   `;
   
   toast.querySelector('button').addEventListener('click', () => toast.remove());
@@ -21,13 +21,13 @@ function showToast(message, type = 'info') {
 
   setTimeout(() => {
     toast.style.opacity = '0';
-    toast.style.transition = 'opacity 0.3s ease';
-    setTimeout(() => toast.remove(), 300);
-  }, 4000);
+    toast.style.transition = 'opacity 0.25s ease';
+    setTimeout(() => toast.remove(), 250);
+  }, 3500);
 }
 
 // ==============================================================
-// 2. FOCUS TELEMETRY & PERSISTENCE
+// 2. ANDROID FOCUS TELEMETRY
 // ==============================================================
 let totalMinutes = parseInt(localStorage.getItem('zf_total_minutes') || '0', 10);
 let totalSessions = parseInt(localStorage.getItem('zf_total_sessions') || '0', 10);
@@ -42,29 +42,7 @@ function updateTelemetryDisplay() {
 updateTelemetryDisplay();
 
 // ==============================================================
-// 3. 2D VIEWPORT SYSTEM (Desktop & Mobile Simulation)
-// ==============================================================
-const dimensionWrapper = document.getElementById('dimensionWrapper');
-const dimensionToggleBtn = document.getElementById('dimensionToggleBtn');
-const dimensionLabel = document.getElementById('dimensionLabel');
-
-dimensionToggleBtn.addEventListener('click', () => {
-  const isDesktop = dimensionWrapper.classList.contains('desktop-mode');
-  if (isDesktop) {
-    dimensionWrapper.classList.remove('desktop-mode');
-    dimensionWrapper.classList.add('mobile-mode');
-    dimensionLabel.textContent = 'Mobile';
-    showToast('Switched to Mobile Viewport Simulator', 'info');
-  } else {
-    dimensionWrapper.classList.remove('mobile-mode');
-    dimensionWrapper.classList.add('desktop-mode');
-    dimensionLabel.textContent = 'Desktop';
-    showToast('Switched to Expansive Desktop View', 'info');
-  }
-});
-
-// ==============================================================
-// 4. THEME & FONT SCALE (Strictly 19px - 23px)
+// 3. THEME & FONT SCALE (Strictly 19px - 23px)
 // ==============================================================
 const darkModeCheckbox = document.getElementById('darkModeCheckbox');
 const fontSlider = document.getElementById('fontSlider');
@@ -78,7 +56,7 @@ darkModeCheckbox.addEventListener('change', (e) => {
   const theme = e.target.checked ? 'dark' : 'light';
   document.body.setAttribute('data-theme', theme);
   localStorage.setItem('zf_theme', theme);
-  showToast(`Palette switched to ${theme} mode`, 'info');
+  showToast(`Switched to ${theme} mode`, 'info');
 });
 
 fontSlider.addEventListener('input', (e) => {
@@ -94,7 +72,7 @@ fontSizeIndicator.textContent = `${savedFontSize}px`;
 document.documentElement.style.setProperty('--font-size', `${savedFontSize}px`);
 
 // ==============================================================
-// 5. SIDEBAR DRAWERS & 100dvh x 100dvw MODALS
+// 4. SIDEBAR DRAWERS & FULLSCREEN MODALS
 // ==============================================================
 const leftMenuBtn = document.getElementById('leftMenuBtn');
 const rightMenuBtn = document.getElementById('rightMenuBtn');
@@ -121,7 +99,7 @@ rightMenuBtn.addEventListener('click', () => {
 drawerOverlay.addEventListener('click', closeDrawers);
 document.querySelectorAll('[data-close]').forEach(btn => btn.addEventListener('click', closeDrawers));
 
-// Fullscreen Modals
+// Modals
 document.querySelectorAll('.nav-link-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     closeDrawers();
@@ -136,7 +114,7 @@ document.querySelectorAll('.close-modal-btn').forEach(btn => {
   });
 });
 
-// Dev Bio Clamp
+// Developer Bio Clamp
 const toggleBioBtn = document.getElementById('toggleBioBtn');
 const devBioText = document.getElementById('devBioText');
 toggleBioBtn.addEventListener('click', () => {
@@ -147,13 +125,13 @@ toggleBioBtn.addEventListener('click', () => {
 // Partner Form
 document.getElementById('partnerForm').addEventListener('submit', (e) => {
   e.preventDefault();
-  showToast('Partnership proposal submitted successfully.', 'success');
+  showToast('Proposal submitted successfully.', 'success');
   e.target.reset();
   document.getElementById('modalPartner').classList.remove('active');
 });
 
 // ==============================================================
-// 6. TIMER ENGINE WITH GOAL ANCHORING
+// 5. TIMER ENGINE
 // ==============================================================
 let countdown = 1500;
 let remaining = 1500;
@@ -184,7 +162,6 @@ timerToggle.addEventListener('click', () => {
         timerId = null;
         timerToggle.textContent = 'Start Sprint';
         
-        // Log telemetry
         totalSessions += 1;
         totalMinutes += Math.round(countdown / 60);
         localStorage.setItem('zf_total_sessions', totalSessions);
@@ -192,7 +169,7 @@ timerToggle.addEventListener('click', () => {
         updateTelemetryDisplay();
 
         triggerChime();
-        showToast('Work Sprint Completed! Session logged.', 'success');
+        showToast('Work Sprint Completed! Logged.', 'success');
       }
     }, 1000);
     timerToggle.textContent = 'Pause Sprint';
@@ -235,7 +212,7 @@ function triggerChime() {
 }
 
 // ==============================================================
-// 7. CALIBRATED ACOUSTIC FLOW SHIELD (40Hz Harmonic + Brown Noise)
+// 6. CALIBRATED ACOUSTIC FLOW SHIELD
 // ==============================================================
 let audioCtx = null;
 let noiseNode = null;
@@ -258,7 +235,6 @@ audioToggleBtn.addEventListener('click', () => {
 
   audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
 
-  // 1. Procedural Brown Spectrum
   const bufferLen = audioCtx.sampleRate * 2;
   const buffer = audioCtx.createBuffer(1, bufferLen, audioCtx.sampleRate);
   const data = buffer.getChannelData(0);
@@ -279,13 +255,12 @@ audioToggleBtn.addEventListener('click', () => {
   noiseNode.connect(noiseGain);
   noiseGain.connect(audioCtx.destination);
 
-  // 2. 40Hz Harmonic Focus Carrier (Binaural Flow State Frequency)
   carrierNode = audioCtx.createOscillator();
   carrierNode.type = 'sine';
   carrierNode.frequency.setValueAtTime(40, audioCtx.currentTime);
 
   const carrierGain = audioCtx.createGain();
-  carrierGain.gain.value = 0.015; // Low-level harmonic anchor
+  carrierGain.gain.value = 0.015;
   carrierNode.connect(carrierGain);
   carrierGain.connect(audioCtx.destination);
 
@@ -293,11 +268,11 @@ audioToggleBtn.addEventListener('click', () => {
   carrierNode.start();
 
   audioBtnText.textContent = 'Silence Shield';
-  showToast('Flow Shield Active: Brown Noise + 40Hz Carrier', 'success');
+  showToast('Flow Shield Active: 40Hz Harmonic', 'success');
 });
 
 // ==============================================================
-// 8. TO-DO CHECKLIST (Zero Horizontal Spill)
+// 7. TO-DO & ANCHORING
 // ==============================================================
 const todoForm = document.getElementById('todoForm');
 const todoInput = document.getElementById('todoInput');
@@ -312,11 +287,11 @@ function renderTasks() {
     if (t.completed) li.classList.add('completed');
 
     li.innerHTML = `
-      <input type="checkbox" ${t.completed ? 'checked' : ''} aria-label="Toggle Completion">
+      <input type="checkbox" ${t.completed ? 'checked' : ''} aria-label="Toggle">
       <span class="todo-text">${t.text}</span>
       <div class="todo-actions">
-        <button class="action-chip-btn anchor" title="Anchor as active goal">🎯</button>
-        <button class="action-chip-btn delete" title="Delete task">✕</button>
+        <button class="action-chip-btn anchor" title="Anchor Target">🎯</button>
+        <button class="action-chip-btn delete" title="Delete">✕</button>
       </div>
     `;
 
@@ -327,7 +302,7 @@ function renderTasks() {
 
     li.querySelector('.anchor').addEventListener('click', () => {
       activeTargetText.textContent = t.text;
-      showToast(`Anchored focus goal: "${t.text}"`, 'info');
+      showToast(`Anchored: "${t.text}"`, 'info');
       closeDrawers();
     });
 
@@ -352,7 +327,7 @@ todoForm.addEventListener('submit', (e) => {
   tasks.push({ text, completed: false });
   todoInput.value = '';
   saveTasks();
-  showToast('Objective appended to checklist', 'info');
+  showToast('Objective saved.', 'info');
 });
 renderTasks();
 
@@ -364,7 +339,7 @@ scratchpadArea.addEventListener('input', () => {
 });
 
 // ==============================================================
-// 9. PWA INSTALL, WEB SHARE & BLUETOOTH APIS
+// 8. ANDROID INSTALL, SHARE & BLUETOOTH
 // ==============================================================
 let deferredPrompt = null;
 const installAppBtn = document.getElementById('installAppBtn');
@@ -383,7 +358,7 @@ installAppBtn.addEventListener('click', async () => {
     const { outcome } = await deferredPrompt.userChoice;
     if (outcome === 'accepted') {
       deferredPrompt = null;
-      showToast('ZenFocus Pro Installed Successfully', 'success');
+      showToast('ZenFocus Pro Added to Android Home Screen', 'success');
     }
   } else {
     showToast('App is ready offline or already installed.', 'info');
@@ -395,7 +370,7 @@ shareAppBtn.addEventListener('click', async () => {
     try {
       await navigator.share({
         title: 'ZenFocus Pro',
-        text: 'Production grade focus and acoustic flow workspace.',
+        text: 'Android-first cognitive workflow workspace.',
         url: window.location.href,
       });
       showToast('Shared successfully.', 'success');
@@ -409,13 +384,13 @@ shareAppBtn.addEventListener('click', async () => {
 bluetoothShareBtn.addEventListener('click', async () => {
   if (navigator.bluetooth) {
     try {
-      showToast('Initializing Bluetooth peripheral scan...', 'info');
+      showToast('Scanning nearby Bluetooth devices...', 'info');
       await navigator.bluetooth.requestDevice({ acceptAllDevices: true });
       showToast('Bluetooth pairing handshake ready.', 'success');
     } catch (_) {
-      showToast('Bluetooth pairing dismissed or unavailable.', 'danger');
+      showToast('Bluetooth pairing dismissed.', 'danger');
     }
   } else {
-    showToast('Web Bluetooth API requires Chrome on supported OS.', 'danger');
+    showToast('Web Bluetooth available on Chrome Android.', 'danger');
   }
 });
