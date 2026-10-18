@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZenFocus Pro</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-theme="light">
+  <!-- 2D Viewport Wrapper -->
+  <div id="dimensionWrapper" class="desktop-mode">
+    
+    <!-- Top Navigation Bar -->
+    <header class="app-header">
+      <button id="leftMenuBtn" class="nav-btn" aria-label="Open Informational Menu">
+        <span class="hamburger-icon">☰</span>
+      </button>
+
+      <div class="brand">
+        <img src="icon.svg" alt="ZenFocus Logo" class="brand-logo" />
+        <span class="brand-name">ZenFocus Pro</span>
+      </div>
+
+      <div class="header-actions">
+        <!-- 2D Toggle: Desktop vs Mobile Viewport -->
+        <button id="dimensionToggleBtn" class="pill-action-btn" title="Toggle Desktop/Mobile Dimension">
+          🖥️ View
+        </button>
+        <button id="rightMenuBtn" class="nav-btn chrome-dots" aria-label="Open Utility Menu">
+          ⋮
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="workspace">
+      <section class="timer-display-card">
+        <div class="session-selector">
+          <button class="session-tab active" data-time="1500">Focus 25m</button>
+          <button class="session-tab" data-time="300">Rest 5m</button>
+        </div>
+        <div id="timerDisplay" class="countdown-clock">25:00</div>
+        <div class="timer-actions">
+          <button id="timerToggle" class="primary-btn">Start Session</button>
+          <button id="timerReset" class="secondary-btn">Reset</button>
+        </div>
+      </section>
+
+      <section class="quick-sound-card">
+        <div class="sound-info">
+          <h3>Ambient Brown Noise</h3>
+          <p>Acoustic masking via Web Audio</p>
+        </div>
+        <button id="audioToggleBtn" class="sound-btn">▶ Play Noise</button>
+      </section>
+
+      <section class="notes-panel">
+        <label for="scratchpadArea" class="section-label">Session Scratchpad</label>
+        <textarea id="scratchpadArea" placeholder="Capture rapid thoughts here (auto-saved)..."></textarea>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>ZenFocus Pro • Built to Strict Quality Conventions</p>
+    </footer>
+  </div>
+
+  <!-- LEFT SIDEBAR: Informational Drawer -->
+  <aside id="leftSidebar" class="sidebar drawer-left">
+    <div class="drawer-header">
+      <h2>Information Hub</h2>
+      <button class="close-btn" data-close="leftSidebar">✕</button>
+    </div>
+    <nav class="drawer-nav">
+      <button class="nav-link-btn" data-modal="modalAboutApp">About the App</button>
+      <button class="nav-link-btn" data-modal="modalAboutDev">About Developer</button>
+      <button class="nav-link-btn" data-modal="modalAboutTeam">About Team</button>
+      <button class="nav-link-btn" data-modal="modalProprietary">Proprietary Software Warning</button>
+      <button class="nav-link-btn" data-modal="modalHowToUse">How to Use</button>
+      <button class="nav-link-btn" data-modal="modalPartner">Partner With Us</button>
+      <button class="nav-link-btn" data-modal="modalContact">Contact Us</button>
+    </nav>
+  </aside>
+
+  <!-- RIGHT SIDEBAR: Chrome Style Utilities Drawer -->
+  <aside id="rightSidebar" class="sidebar drawer-right">
+    <div class="drawer-header">
+      <h2>Settings & Utilities</h2>
+      <button class="close-btn" data-close="rightSidebar">✕</button>
+    </div>
+    <div class="drawer-content">
+      <!-- Dark Mode Switch -->
+      <div class="utility-row">
+        <span>Dark Mode</span>
+        <label class="switch">
+          <input type="checkbox" id="darkModeCheckbox">
+          <span class="slider round"></span>
+        </label>
+      </div>
+
+      <!-- Font Slider (19px to 23px) -->
+      <div class="utility-row font-control">
+        <label for="fontSlider">Font Scale: <strong id="fontSizeIndicator">19px</strong></label>
+        <input type="range" id="fontSlider" min="19" max="23" value="19" step="1">
+      </div>
+
+      <!-- To-Do List Section -->
+      <div class="todo-widget">
+        <h3>Master Checklist</h3>
+        <form id="todoForm">
+          <input type="text" id="todoInput" placeholder="Add actionable item..." required>
+          <button type="submit" class="primary-btn">Add</button>
+        </form>
+        <ul id="todoList" class="todo-list"></ul>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="actions-stack">
+        <button id="installAppBtn" class="utility-btn">📲 Install App</button>
+        <button id="shareAppBtn" class="utility-btn">🔗 Share App</button>
+        <button id="bluetoothShareBtn" class="utility-btn bluetooth">📶 Share via Bluetooth</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Backdrop overlay for sidebars -->
+  <div id="drawerOverlay" class="drawer-overlay"></div>
+
+  <!-- ============================================================== -->
+  <!-- FULL SCREEN 100dvh x 100dvw EDGE-TO-EDGE MODALS               -->
+  <!-- ============================================================== -->
+
+  <!-- Modal: About App -->
+  <div id="modalAboutApp" class="fullscreen-modal">
+    <header class="modal-header">
+      <h2>About ZenFocus Pro</h2>
+      <button class="close-modal-btn">✕ Close</button>
+    </header>
+    <div class="modal-body">
+      <p>ZenFocus Pro is a dual-dimensional (Desktop and Mobile viewports) professional focus environment engineered for deep work cycles, high-frequency task switching, and acoustic focus.</p>
+      <p>Designed strictly to eliminate eye strain with zero font sizes below 19px, seamless light and dark mode contrasts, offline PWA capability, and fully contained Web Audio synthesis.</p>
+    </div>
+  </div>
+
+  <!-- Modal: About Developer -->
+  <div id="modalAboutDev" class="fullscreen-modal">
+    <header class="modal-header">
+      <h2>About Developer</h2>
+      <button class="close-modal-btn">✕ Close</button>
+    </header>
+    <div class="modal-body dev-profile">
+      <!-- SWAP URL HERE: Circle Photo Placeholder -->
+      <img 
+        src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=80" 
+        alt="Developer Photo" 
+        id="devPhotoPlaceholder" 
+        class="circle-dev-img" 
+      />
+      <h3 class="dev-name">Alex Vance</h3>
+      <h4 class="dev-role">Principal Systems Architect & UI Designer</h4>
+
+      <div id="devBioText" class="clamped-bio">
+        Alex Vance is a seasoned software designer and product architect specializing in accessible web applications, offline systems, and progressive browser software. With over a decade of production experience across enterprise engineering, Alex builds tools that prioritize human performance without clutter. This software reflects strict build standards, ensuring readable typography, edge-to-edge responsiveness, zero unnecessary tracking, and uncompromising runtime stability. Every component in this application was handcrafted to balance technical minimalism with rich sensory design.
+      </div>
+      <button id="toggleBioBtn" class="text-expand-btn">Show More</button>
+    </div>
+  </div>
+
+  <!-- Modal: About Team -->
+  <div id="modalAboutTeam" class="fullscreen-modal">
+    <header class="modal-header">
+      <h2>About Our Team</h2>
+      <button class="close-modal-btn">✕ Close</button>
+    </header>
+    <div class="modal-body team-grid">
+      <!-- Member 1 -->
+      <div class="team-card">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&auto=format&fit=crop&q=80" alt="Sarah Chen" class="team-photo" />
+        <h3 class="team-name">Sarah Chen</h3>
+        <p class="team-role">Head of Product</p>
+        <p class="team-bio">Focusing on high-accessibility interfaces and mindful technology design.</p>
+      </div>
+      <!-- Member 2 -->
+      <div class="team-card">
+        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&auto=format&fit=crop&q=80" alt="Marcus Gray" class="team-photo" />
+        <h3 class="team-name">Marcus Gray</h3>
+        <p class="team-role">Audio Engineer</p>
+        <p class="team-bio">Pioneer in client-side procedural sound generation and binaural focus.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Proprietary Software Warning -->
+  <div id="modalProprietary" class="fullscreen-modal">
+    <header class="modal-header">
+      <h2>Proprietary Notice</h2>
+      <button class="close-modal-btn">✕ Close</button>
+    </header>
+    <div class="modal-body legal-text">
+      <div class="warning-banner">⚠️ STRICT PROPRIETARY NOTICE & COPYRIGHT RESTRICTION</div>
+      <p>All source code, asset formulations, procedural audio synthesis routines, UI layouts, and associated algorithms are strictly proprietary property.</p>
+      <p>Unauthorized copying, decompilation, redistribution, commercial reselling, or reverse engineering of this software in whole or in part without prior explicit written authorization is unlawful and subject to legal prosecution.</p>
+      <p>© ZenFocus Software Works. All rights reserved.</p>
+    </div>
+  </div>
+
+  <!-- Modal: How to Use -->
+  <div id="modalHowToUse" class="fullscreen-modal">
+    <header class="modal-header">
+      <h2>How to Use</h2>
+      <button class="close-modal-btn">✕ Close</button>
+    </header>
+    <div class="modal-body instructions-list">
+      <ol>
+        <li><strong>Set Up Your Session:</strong> Select either 25-minute Focus mode or 5-minute Rest mode on the workspace dashboard.</li>
+        <li><strong>Activate Audio Masking:</strong> Click "Play Noise" to trigger smooth browser-generated brown noise to neutralize background chatter.</li>
+        <li><strong>Manage Deliverables:</strong> Open the right ⋮ menu to track daily actionable items and tweak font readability between 19px and 23px.</li>
+        <li><strong>2D Screen Toggle:</strong> Use the 🖥️ View button on top to toggle between expansive desktop view and mobile phone simulator mode.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Modal: Partner With Us -->
+  <div id="modalPartner" class="fullscreen-modal">
+    <header class="modal-header">
+      <h2>Partner With Us</h2>
+      <button class="close-modal-btn">✕ Close</button>
+    </header>
+    <div class="modal-body partner-content">
+      <p>We actively collaborate with educational institutions, remote work teams, and accessibility organizations.</p>
+      <p>Inquire directly about white-label deployments, custom audio algorithms, or multi-platform licensing.</p>
+      <div class="form-container">
+        <input type="text" placeholder="Organization / Company Name" class="std-input">
+        <input type="email" placeholder="Official Business Email" class="std-input">
+        <button class="primary-btn" onclick="alert('Inquiry received. Our partnership desk will follow up.')">Submit Proposal</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Contact Us -->
+  <div id="modalContact" class="fullscreen-modal">
+    <header class="modal-header">
+      <h2>Contact Us</h2>
+      <button class="close-modal-btn">✕ Close</button>
+    </header>
+    <div class="modal-body">
+      <p>Select your channel of choice to contact our team directly:</p>
+      
+      <!-- 4 Required Brand Buttons -->
+      <div class="brand-buttons-stack">
+        <a href="mailto:contact@zenfocuspro.app" class="brand-btn gmail" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" class="btn-icon"><path fill="currentColor" d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          Gmail Official
+        </a>
+        <a href="tel:+18005550199" class="brand-btn phone">
+          <svg viewBox="0 0 24 24" class="btn-icon"><path fill="currentColor" d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          Direct Line Phone
+        </a>
+        <a href="https://wa.me/18005550199" class="brand-btn whatsapp" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" class="btn-icon"><path fill="currentColor" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c4.54 0 8.24 3.7 8.24 8.24 0 2.2-.86 4.28-2.42 5.84-1.56 1.56-3.64 2.4-5.83 2.4-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24"/></svg>
+          WhatsApp Business
+        </a>
+        <a href="https://facebook.com" class="brand-btn facebook" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" class="btn-icon"><path fill="currentColor" d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>
+          Facebook Page
+        </a>
+      </div>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
