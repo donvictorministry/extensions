@@ -394,3 +394,39 @@ bluetoothShareBtn.addEventListener('click', async () => {
     showToast('Web Bluetooth available on Chrome Android.', 'danger');
   }
 });
+
+window.DV = window.DV || {
+  addNavItem: function(item) {
+    const viewport = document.querySelector('.android-viewport');
+    if (viewport) {
+      const card = document.createElement('section');
+      card.className = 'mobile-card';
+      card.id = item.id || 'dv-jesus-puzzle-card';
+      card.innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <h3 style="font-size:calc(var(--font-size, 19px) + 1px); font-weight:800; margin-bottom:4px;">JESUS Slide Puzzle</h3>
+            <p style="color:var(--text-muted, #334155); font-size:var(--font-size, 19px);">Slide to spell JESUS &amp; earn Certificate</p>
+          </div>
+          <button id="launchJesusGameBtn" class="primary-btn" style="width:auto; padding:12px 20px; font-size:var(--font-size, 19px);">Play</button>
+        </div>
+      `;
+      // Mounts right above the scratchpad
+      viewport.insertBefore(card, viewport.querySelector('.notes-panel') || viewport.lastElementChild);
+    }
+  },
+  route: function(key, handler) {
+    const btn = document.getElementById('launchJesusGameBtn');
+    if (btn) {
+      btn.addEventListener('click', handler.open);
+    }
+  },
+  logActivity: function(title, desc) {
+    if (typeof showToast === 'function') {
+      showToast(`${title}: ${desc}`, 'success');
+    }
+  },
+  closeRoute: function() {
+    // Graceful return to main dashboard
+  }
+};
