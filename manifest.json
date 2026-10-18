@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "ZenFocus Pro",
+  "version": "2.0.0",
+  "description": "Premium 2D Focus Dashboard, Pomodoro & Ambient Sound Hub.",
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": "icon.svg"
+  },
+  "icons": {
+    "128": "icon.svg",
+    "512": "icon.svg"
+  },
+  "permissions": ["storage"]
+}
